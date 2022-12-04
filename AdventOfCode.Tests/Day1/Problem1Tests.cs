@@ -7,7 +7,7 @@ public class Problem1Tests
     [Fact]
     public void SortIntoGroups_ShouldReturnGroupedItemsInStringArraySeperatedByEmptyEntriesInArray()
     {
-        var sut = new Problem1();
+        var sut = new Day1Problem1();
         var testInput = new[] {"123", "456", "123", " ", "567", "345", "", "789"};
         var expected = new List<List<string>>
         {
@@ -24,7 +24,7 @@ public class Problem1Tests
     [Fact] 
     public void CalculateSumOfCollection_ShouldReturnSumOfGivenStringCollection()
     {
-        var sut = new Problem1();
+        var sut = new Day1Problem1();
         var input = new List<string> {"1", "3", "5"};
         var expected = 9;
 

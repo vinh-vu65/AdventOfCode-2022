@@ -1,6 +1,6 @@
 namespace AdventOfCode.Day1;
 
-public class Problem1
+public class Day1Problem1
 {
     // Read all lines from text file
     // Group lines and separate by empty space
