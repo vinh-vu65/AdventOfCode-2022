@@ -1,16 +1,27 @@
 namespace AdventOfCode.Day1;
 
-public class Day1Problem1
+public class Day1
 {
     // Read all lines from text file
     // Group lines and separate by empty space
     // Add total in each group
     // Find value of highest total
-    public int PutErAllTogether()
+    public int CalculateProblem1()
     {
         var strings = ReadTheFile();
         var groups = SortIntoGroups(strings);
         return GetHighestTotal(groups);
+    }
+    
+    public int CalculateProblem2()
+    {
+        var strings = ReadTheFile();
+        var groups = SortIntoGroups(strings);
+        var top3 = groups
+            .Select(CalculateSumOfCollection)
+            .OrderByDescending(num => num)
+            .Take(3);
+        return top3.Sum();
     }
     
     public IEnumerable<string> ReadTheFile()

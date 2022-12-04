@@ -4,7 +4,7 @@ namespace AdventOfCode.Tests.Day2;
 
 public class Day2Tests
 {
-    private readonly Day2Problem1 _sut = new();
+    private readonly AdventOfCode.Day2.Day2 _sut = new();
     
     [Theory]
     [InlineData(GameChoice.Paper, GameChoice.Scissors, GameOutcome.Win)]

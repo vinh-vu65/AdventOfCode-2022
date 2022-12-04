@@ -1,6 +1,6 @@
 namespace AdventOfCode.Day2;
 
-public class Day2Problem1
+public class Day2
 {
     // ROCK =       A = X = 1   LOSE = 0
     // PAPER =      B = Y = 2   DRAW = 3
@@ -12,7 +12,7 @@ public class Day2Problem1
         ProblemInput = File.ReadAllLines("../../../Day2/Input.txt");
     }
 
-    public int CalculateProblemAnswer()
+    public int CalculateProblem1()
     {
         SetProblemInput();
         return ProblemInput.Select(line => GetTotalGameScore(ParseGameSummary(line))).Sum();
