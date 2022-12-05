@@ -20,12 +20,12 @@ public class Day2Tests
     }
 
     [Fact]
-    public void ParseStrategies_ShouldReturnTupleOfGameChoice_WhenGivenString()
+    public void ParseGameSummaryProblem1_ShouldReturnTupleOfGameChoice_WhenGivenString()
     {
         var inputString = "A X";
         var expected = (GameChoice.Rock, GameChoice.Rock);
         
-        var actual = _sut.ParseGameSummary(inputString);
+        var actual = _sut.ParseGameSummaryProblem1(inputString);
         
         Assert.Equal(expected, actual);
     }
@@ -47,6 +47,31 @@ public class Day2Tests
         var expected = 7;
 
         var actual = _sut.GetTotalGameScore(game);
+        
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ParseGameSummaryProblem2_ShouldReturnElfChoiceAndGameOutcome_WhenGivenString()
+    {
+        var input = "B Y";
+        var expected = (GameChoice.Paper, GameOutcome.Draw);
+
+        var actual = _sut.ParseGameSummaryProblem2(input);
+        
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(GameChoice.Scissors, GameOutcome.Win, GameChoice.Rock)]
+    [InlineData(GameChoice.Scissors, GameOutcome.Lose, GameChoice.Paper)]
+    [InlineData(GameChoice.Scissors, GameOutcome.Draw, GameChoice.Scissors)]
+    public void FindPlayerInput_ShouldReturnCorrectGameChoice_WhenGivenElfChoiceAndGameOutcome(GameChoice elfChoice,
+        GameOutcome outcome, GameChoice expected)
+    {
+        var input = (elfChoice, outcome);
+
+        var actual = _sut.FindPlayerInput(input);
         
         Assert.Equal(expected, actual);
     }

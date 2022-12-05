@@ -15,11 +15,20 @@ public class Day2
     public int CalculateProblem1()
     {
         SetProblemInput();
-        return ProblemInput.Select(line => GetTotalGameScore(ParseGameSummary(line))).Sum();
+        return ProblemInput.Select(line => GetTotalGameScore(ParseGameSummaryProblem1(line))).Sum();
+    }
+
+    public int CalculateProblem2()
+    {
+        SetProblemInput();
+        return ProblemInput.Select(line => GetTotalScoreProblem2(ParseGameSummaryProblem2(line))).Sum();
     }
 
     public int GetTotalGameScore((GameChoice, GameChoice) gameSummary) =>
         GetOutcomeScore(gameSummary) + GetPlayerChoiceScore(gameSummary);
+
+    public int GetTotalScoreProblem2((GameChoice elfChoice, GameOutcome outcome) gameSummary) =>
+        (int) gameSummary.outcome + (int) FindPlayerInput(gameSummary);
 
     public int GetOutcomeScore((GameChoice elfChoice, GameChoice playerChoice) gameSummary)
     {
@@ -37,7 +46,7 @@ public class Day2
     public int GetPlayerChoiceScore((GameChoice elfChoice, GameChoice playerChoice) gameSummary) =>
         (int)gameSummary.playerChoice;
 
-    public (GameChoice elfChoice, GameChoice playerChoice) ParseGameSummary(string gameSummary)
+    public (GameChoice elfChoice, GameChoice playerChoice) ParseGameSummaryProblem1(string gameSummary)
     {
         var elfChoice = gameSummary.First() switch
         {
@@ -54,5 +63,51 @@ public class Day2
         };
 
         return (elfChoice, playerChoice);
+    }
+
+    public (GameChoice, GameOutcome) ParseGameSummaryProblem2(string gameSummary)
+    {
+        var elfChoice = gameSummary.First() switch
+        {
+            'A' => GameChoice.Rock,
+            'B' => GameChoice.Paper,
+            _ => GameChoice.Scissors
+        };
+        
+        var gameOutcome = gameSummary.Last() switch
+        {
+            'X' => GameOutcome.Lose,
+            'Y' => GameOutcome.Draw,
+            _ => GameOutcome.Win
+        };
+
+        return (elfChoice, gameOutcome);
+    }
+
+    public GameChoice FindPlayerInput((GameChoice elfChoice, GameOutcome outcome) input)
+    {
+        if (input.outcome == GameOutcome.Draw) return input.elfChoice;
+
+        if (input.outcome == GameOutcome.Win)
+        {
+            return input.elfChoice switch
+            {
+                GameChoice.Rock => GameChoice.Paper,
+                GameChoice.Paper => GameChoice.Scissors,
+                _ => GameChoice.Rock
+            };
+        }
+        
+        if (input.outcome == GameOutcome.Lose)
+        {
+            return input.elfChoice switch
+            {
+                GameChoice.Rock => GameChoice.Scissors,
+                GameChoice.Paper => GameChoice.Rock,
+                _ => GameChoice.Paper
+            };
+        }
+
+        return GameChoice.Rock;
     }
 }
