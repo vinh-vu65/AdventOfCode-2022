@@ -1,5 +1,3 @@
-using AdventOfCode.Day1;
-
 namespace AdventOfCode.Tests.Day1;
 
 public class Problem1Tests
